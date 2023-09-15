@@ -5,6 +5,107 @@ var createHelloWorld = function() {
     }
 };
 
-
  const f = createHelloWorld();
  f(); // "Hello World"
+
+//Counter
+var createCounter = function(n) {
+    let ans =n-1;
+    return ()=> {
+        ans += 1;
+        return ans;
+    };
+};
+
+//To Be Or Not To Be
+var expect = function (val) {
+  return {
+    toBe: function (toVal) {
+      if (val === toVal) {
+        return true;
+      } else {
+        throw new Error("Not Equal");
+      }
+    },
+    notToBe: function (notToVal) {
+      if (val !== notToVal) {
+        return true;
+      } else {
+        throw new Error("Equal");
+      }
+    },
+  };
+};
+
+//Counter II
+var createCounter = function(init) {
+    let k = init;
+    return {
+        increment:() => {
+            return k+=1;
+        },
+        decrement:()=>{
+            return k-=1;
+        },
+        reset:()=>{
+            k=init;
+            return k;
+        }
+    }
+};
+
+const ans = createCounter(10);
+console.log(ans.decrement());
+console.log(ans.increment());
+console.log(ans.reset());
+console.log(ans.increment());
+
+//Apply Transform Over Each Element in Array
+var map = function(arr, fn) {
+    const ans =[];
+    for(let i=0; i<arr.length; i++){
+        ans.push(fn(arr[i],i));
+    }
+    return ans;
+};
+
+//Filter Elements from Array
+var filter = function(arr, fn) {
+    const ans = [];
+    for(let i=0; i<arr.length; i++){
+        if(fn(arr[i],i))ans.push(arr[i]);
+    }
+    return ans;
+};
+
+//Array Reduce Transformation
+var reduce = function(nums, fn, init) {
+    for(let i=0; i<nums.length; i++)init= fn(init,nums[i]);
+    return init;
+};
+
+//Function Composition
+var compose = function(functions) {
+    return function(x) {
+        // x는 숫자 입력값
+        if(functions.length ===0) return x;
+        let input =x;
+        for(let i= functions.length-1; i>=0;i--){
+            // k는 함수
+            const k = functions[i];
+            //input은 k함수를 거치고 나온 숫자.
+            input = k(input);
+
+        }
+        return input;
+    }
+};
+
+//Return Length of Arguments Passed
+var argumentsLength = function (...args) {
+  return args.length;
+};
+
+//Allow One Function Call
+
+
